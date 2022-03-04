@@ -1,4 +1,3 @@
-gcc -g p1final.c
  gdb a.out
 GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
 Copyright (C) 2018 Free Software Foundation, Inc.
@@ -16,18 +15,72 @@ For help, type "help".
 Type "apropos word" to search for commands related to "word"...
 Reading symbols from a.out...done.
 (gdb) b main
-Breakpoint 1 at 0x873: file p1final.c, line 19.
+Breakpoint 1 at 0x858: file p2final.c, line 34.
 (gdb) r
 Starting program: /home/runner/Test3Session2/a.out 
 warning: Error disabling address space randomization: Operation not permitted
 
-Breakpoint 1, main () at p1final.c:19
-19  {
+Breakpoint 1, main () at p2final.c:34
+34    f1=input_fraction();
 (gdb) n
-21    input(&num1,&den1,&num2,&den2);
+enter the fraction/n
+1
+2
+35    f2=input_fraction();
+(gdb) n
+enter the fraction/n
+1
+4
+36    f3=input_fraction();
+(gdb) n
+enter the fraction/n
+1
+8
+37    largest = find_largest(f1,f2,f3);
 (gdb) s
-input (num1=0x7fff34cb4ad0, den1=0x7fff34cb4ad4, num2=0x7fff34cb4ad8, 
-    den2=0x7fff34cb4adc) at p1final.c:4
+find_largest (f1=..., f2=..., f3=...) at p2final.c:16
+16    int common_denominator =f1.den * f2.den *f3.den;
+(gdb) n
+17     int num1=f1.num * common_denominator/f1.den;
+(gdb) n
+18     int num2=f2.num * common_denominator/f2.den;
+(gdb) n
+19     int num3=f3.num * common_denominator/f3.den;
+(gdb) n
+20     if(num1 < num2 && num1<num3)
+(gdb) n
+ pwd
+/home/runner/Test3Session2
+ gcc -g p1final.c
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x8bc: file p1final.c, line 25.
+(gdb) r
+Starting program: /home/runner/Test3Session2/a.out 
+warning: Error disabling address space randomization: Operation not permitted
+
+Breakpoint 1, main () at p1final.c:25
+25  {
+(gdb) n
+27    input(&num1,&den1,&num2,&den2);
+(gdb) s
+input (num1=0x7fffd27b4990, den1=0x7fffd27b4994, num2=0x7fffd27b4998, 
+    den2=0x7fffd27b499c) at p1final.c:4
 4     printf("enter the numerator\n");
 (gdb) n
 enter the numerator
@@ -44,22 +97,27 @@ enter the denominator
 4
 8   }
 (gdb) n
-main () at p1final.c:22
-22    add(num1,den1,num2,den2,&num3,&den3);
-(gdb) n
-23    output(num1,den1,num2,den2,num3,den3);
+main () at p1final.c:28
+28    add(num1,den1,num2,den2,&num3,&den3);
 (gdb) s
-output (num1=1, den1=2, num2=1, den2=4, num3=6, den3=8) at p1final.c:16
-16    printf("sum 0f %d/%d + %d/%d is %d/%d",num1,den1,num2,den2,num3,den3);
+add (num1=1, den1=2, num2=1, den2=4, num3=0x7fffd27b49a0, den3=0x7fffd27b49a4)
+    at p1final.c:11
+11    *num3= (num1*den2) + (num2*den1);
 (gdb) n
-17  }
+12    *den3=den2*den1;
 (gdb) n
-main () at p1final.c:24
-24  }
+13  }
 (gdb) n
-__libc_start_main (main=0x55d7e340086b <main>, argc=1, argv=0x7fff34cb4bd8, 
-    init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, 
-    stack_end=0x7fff34cb4bc8) at ../csu/libc-start.c:344
+main () at p1final.c:29
+29    output(num1,den1,num2,den2,num3,den3);
+(gdb) n
+30  }
+(gdb) n
+__libc_start_main (main=0x560419c008b4 <main>, argc=1, 
+    argv=0x7fffd27b4a98, init=<optimized out>, fini=<optimized out>, 
+    rtld_fini=<optimized out>, stack_end=0x7fffd27b4a88)
+    at ../csu/libc-start.c:344
 344 ../csu/libc-start.c: No such file or directory.
 (gdb) n
-sum 0f 1/2 + 1/4 is 6/8[Inferior 1 (process 925) exited normally]
+sum 0f 1/2 + 1/4 is 3/4[Inferior 1 (process 639) exited normally]
+(gdb) 
