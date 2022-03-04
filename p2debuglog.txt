@@ -1,1 +1,91 @@
+gcc -g p2final.c
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+ pwd
+/home/runner/Test3Session2
+ gcc -g p2final.c
+ gdb a.out
+GNU gdb (Ubuntu 8.1.1-0ubuntu1) 8.1.1
+Copyright (C) 2018 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from a.out...done.
+(gdb) b main
+Breakpoint 1 at 0x858: file p2final.c, line 34.
+(gdb) r
+Starting program: /home/runner/Test3Session2/a.out 
+warning: Error disabling address space randomization: Operation not permitted
 
+Breakpoint 1, main () at p2final.c:34
+34    f1=input_fraction();
+(gdb) n
+enter the fraction/n
+1
+2
+35    f2=input_fraction();
+(gdb) n
+enter the fraction/n
+1
+4
+36    f3=input_fraction();
+(gdb) n
+enter the fraction/n
+1
+8
+37    largest = find_largest(f1,f2,f3);
+(gdb) s
+find_largest (f1=..., f2=..., f3=...) at p2final.c:16
+16    int common_denominator =f1.den * f2.den *f3.den;
+(gdb) n
+17     int num1=f1.num * common_denominator/f1.den;
+(gdb) n
+18     int num2=f2.num * common_denominator/f2.den;
+(gdb) n
+19     int num3=f3.num * common_denominator/f3.den;
+(gdb) n
+20     if(num1 < num2 && num1<num3)
+(gdb) n
+22    else if (num2<num3)
+(gdb) n
+25      return f3;
+(gdb) n
+26  }
+(gdb) n
+main () at p2final.c:38
+38    output(f1,f2,f3,largest);
+(gdb) s
+output (f1=..., f2=..., f3=..., largest=...) at p2final.c:29
+29    printf("the largest of %d/%d,%d/%d,%d/%d is %d/%d/n",f1.num,f1.den,f2.num,f2.den,f3.num,f3.den,largest.num,largest.den);
+(gdb) n
+30  }
+(gdb) n
+main () at p2final.c:39
+39    return 0;
+(gdb) n
+40  }
+(gdb) n
+__libc_start_main (main=0x563dfd400850 <main>, argc=1, argv=0x7ffff94ae468, 
+    init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, 
+    stack_end=0x7ffff94ae458) at ../csu/libc-start.c:344
+344 ../csu/libc-start.c: No such file or directory.
+(gdb) n
+the largest of 1/2,1/4,1/8 is 1/8/n[Inferior 1 (process 374) exited normally]
